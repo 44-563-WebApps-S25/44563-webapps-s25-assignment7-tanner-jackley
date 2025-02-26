@@ -1,0 +1,11 @@
+.title {
+    text-align: center;
+    color: gold;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    -webkit-text-stroke: .5px black;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5)
+}
+
+div {
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
