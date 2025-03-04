@@ -24,10 +24,11 @@
 
   function beginTime() {
     haltTime = undefined;
-    for (let i = 0; i <= 5; i++) {
+    let randomValue = Math.floor(Math.random() * 9) + 2; 
+    for (let i = 0; i <= randomValue; i++) {
       setTimeout(function() {
       document.getElementById('counter').innerHTML = i;
-    }, (5-i)*1000)
+    }, (randomValue-i)*1000)
     }
     setTimeout(function() {
       if (haltTime == undefined) {
@@ -37,7 +38,7 @@
         targetTime = Date.now();
         document.getElementById('target').innerHTML = `Time was ${targetTime - haltTime}`;
       }
-    }, 5000)
+    }, randomValue*1000)
   }
   
   function recordTime() {

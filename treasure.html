@@ -83,10 +83,35 @@
   var score = 0; 
   var locationsVisited = 0;
   var lastLocation = 0;
-  var silverLocations = [2, 5, 11, 21, 32];
-  var goldLocation = 15;
-  var snakeLocation = 20;
+  // Get random values that are not equal
+  function getUniqueRandom(excludeList, max) {
+    var randomValue;
+    do {
+        randomValue = Math.floor(Math.random() * (max + 1)); 
+    } while (excludeList.includes(randomValue)); 
+    return randomValue;
+  }
+  var silverLocations = [];
+  for (let i = 0; i < 5; i++) {
+      silverLocations.push(getUniqueRandom(silverLocations, 34));
+  }
+  var goldLocation = getUniqueRandom(silverLocations, 34);
+  var snakeLocation = getUniqueRandom([...silverLocations, goldLocation], 34);
+
+  // Output the results
+  console.log("Silver Locations:", silverLocations);
+  console.log("Gold Location:", goldLocation);
+  console.log("Snake Location:", snakeLocation);
   var gameOver = false;
+
+  function moveSnake() {
+    var currentRow = Math.floor(snakeLocation / 7);
+    var currentCol = snakeLocation % 7;
+    var newRow = (currentRow + 1) % 5; 
+    var newCol = (currentCol + 1) % 7; 
+
+    snakeLocation = newRow * 7 + newCol;
+  }
 
   function check(position) {
     if (gameOver) {}
@@ -120,6 +145,9 @@
       var helpDiv = document.getElementById("help");
       locationsDiv.innerText = "Number of locations checked is " + locationsVisited;
       scoreDiv.innerText = "Score is " + score;
+
+      moveSnake();
+      console.log(snakeLocation);
     }
   }
 

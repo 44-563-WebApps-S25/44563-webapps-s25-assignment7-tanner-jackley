@@ -33,31 +33,32 @@
 		<div class="divlist">row item 2</div>  
 		<div class="divlist">row item 3</div>  
 	</div>
-	
-	<p> Press the button to create an new element of type div and then add it to the container.</p>
 
 	<button onclick="addFront()">Add front</button>
 	<button onclick="addEnd()">Add end</button>
 	<button onclick="remove()">Remove</button>
+	<button onclick="promote()">Promote</button>
 	
 	
 </body>
 <script>
-	function addEnd(){
+	function addEnd() {
 		/* make the div and its text */
-		let element = document.createElement("div")
+		let element = document.createElement("div");
 		element.innerHTML = document.getElementById("input").value;
-		element.style.color = "orange"
+		element.style.color = "orange";
+		element.classList.add("divlist");
 
 		/* add it to the container */
-		let container = document.getElementById('target')
-		container.appendChild(element)
-		
+		let container = document.getElementById('target');
+		container.appendChild(element);
 	}
+
 
 	function remove() {
 		let divListItems = document.getElementsByClassName("divlist");
-		if (divListItems.length > 0) {
+		let length = divListItems.length;
+		if (length > 0) {
 			divListItems[Math.floor(length/2)].remove();
 		}
 	}
@@ -67,10 +68,23 @@
 		let element = document.createElement("div");
 		element.innerHTML = document.getElementById("input").value;
 		element.style.color = "orange";
+		element.classList.add("divlist");
 
 		/* add it to the container */
 		let container = document.getElementById('target');
 		container.insertBefore(element, container.firstChild);
 	}
+
+	function promote() {
+		let container = document.getElementById('target');
+		let divListItems = container.getElementsByClassName("divlist");
+
+		let randomIndex = Math.floor(Math.random() * (divListItems.length - 1)) + 1;
+
+		let selectedElement = divListItems[randomIndex];
+		let previousElement = divListItems[randomIndex - 1];
+
+		container.insertBefore(selectedElement, previousElement);
+}
 </script>
 </html>	
